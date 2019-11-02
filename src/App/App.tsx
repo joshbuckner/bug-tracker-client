@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Bug Tracker</h1>
           <Menu />
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
