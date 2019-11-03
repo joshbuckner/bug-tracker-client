@@ -15,8 +15,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       const data = await postData('http://localhost:8080/api/login', input);
-      console.log(data);
-      if (data.token && data.user) {
+      if (data.token) {
         dispatch({ type: "LOGIN", payload: data });
       }
       // JSON-string from `response.json()` call

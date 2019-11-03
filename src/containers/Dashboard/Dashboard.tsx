@@ -6,7 +6,6 @@ const Dashboard: React.FC = () => {
   const { state: authState } = React.useContext(AuthContext);
   const [events, setEvents] = useState<any[]>([]);
   useEffect(() => {
-    console.log(authState.user);
     const getEvents = async () => {
       // Default options are marked with *
       const response = await fetch("http://localhost:8080/api/events", {
@@ -35,7 +34,7 @@ const Dashboard: React.FC = () => {
   }, [authState]);
   return (
     <div className="Dashboard">
-      <h2>{authState.user.name}'s Dashboard</h2>
+      <h2>Dashboard</h2>
       <div className="Dashboard__access-token">
         <h4 style={{margin: 0, display: "inline"}}>Access Token</h4>
         <div className="Dashboard__code"><code>{authState.user.access_token}</code></div>

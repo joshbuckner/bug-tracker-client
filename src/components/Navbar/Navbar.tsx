@@ -8,8 +8,7 @@ const Navbar: React.FC = () => {
 
   const logOut = () => {
     dispatch({ type: "LOGOUT" });
-    console.log('log out');
-  }
+  };
   return (
     <div className="Navbar">
       <Link to="/">
@@ -27,11 +26,39 @@ const Navbar: React.FC = () => {
           </>
         ) : (
           <>
-            <Link to="/dashboard">
-              <li>Dashboard</li>
-            </Link>
-            <div onClick={logOut}>
-              <li>Log out</li>
+            <div className="Navbar__dropdown">
+              <div className="Navbar__dropdown-user">
+                <img className="Navbar__dropdown-identicon" src={`https://identicon.rmhdev.net/${state.user.name}.png`} alt="user identicon"/>
+                <div>{state.user.name}</div>
+                <svg viewBox="0 0 255 255" height="14">
+                  <g>
+                    <g id="arrow-drop-down">
+                      <polygon points="0,63.75 127.5,191.25 255,63.75" />
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg>
+              </div>
+              <div className="Navbar__dropdown-options">
+                <Link to="/dashboard">
+                  <div>Dashboard</div>
+                </Link>
+                <div onClick={logOut}>Log Out</div>
+              </div>
             </div>
           </>
         )}

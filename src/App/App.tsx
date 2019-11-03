@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import jwtDecode from 'jwt-decode';
 import Home from "../containers/Home/Home";
 import Register from "../containers/Register/Register";
 import Login from "../containers/Login/Login";
@@ -19,18 +20,16 @@ const reducer = (state: any, action: any) => {
   switch (action.type) {
     case "LOGIN":
       localStorage.clear();
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("user", JSON.stringify(jwtDecode(action.payload.token.replace("Bearer ", ""))));
       localStorage.setItem("token", JSON.stringify(action.payload.token));
-      // history.push("/login");
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        user: jwtDecode(action.payload.token.replace("Bearer ", "")),
         token: action.payload.token
       };
     case "LOGOUT":
       localStorage.clear();
-      // history.push("/login");
       return {
         ...state,
         isAuthenticated: false,
@@ -53,7 +52,6 @@ const App: React.FC = () => {
       dispatch({
         type: "LOGIN",
         payload: {
-          user,
           token
         }
       });

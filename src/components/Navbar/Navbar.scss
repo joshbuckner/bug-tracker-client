@@ -5,7 +5,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: calc(10px + 1vmin);
+  font-size: 19px;
   a {
     color: white;
     text-decoration: none;
@@ -14,13 +14,13 @@
     }
   }
   .Navbar__title {
-    margin: auto 0 6px 20px;
+    margin: auto 0 6px 60px;
     padding: 8px 6px 6px;
   }
   .Navbar__links {
     list-style-type: none;
     display: flex;
-    margin: 0 20px 0 0;
+    margin: 0 60px 0 0;
     padding: 0;
     li {
       padding: 8px 6px 6px;
@@ -29,6 +29,53 @@
       cursor: pointer;
       &:hover {
         color: $base-color;
+      }
+    }
+  }
+  .Navbar__dropdown {
+    position: relative;
+    display: inline-block;
+    &:hover {
+      .Navbar__dropdown-options {
+        display: block;
+      }
+      .Navbar__dropdown-user svg g {
+        fill: $base-color;
+      }
+    }
+    .Navbar__dropdown-user {
+      padding: 8px 6px 6px;
+      display: flex;
+      .Navbar__dropdown-identicon {
+        height: 28px;
+        margin-right: 8px;
+        border-radius: 5px;
+      }
+      svg {
+        margin: 7px 0 0 4px;
+        g {
+          fill: white;
+        }
+      }
+    }
+    .Navbar__dropdown-options {
+      right: 0;
+      display: none;
+      position: absolute;
+      background-color: $base-color;
+      min-width: 120px;
+      border-radius: 5px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      div {
+        color: white;
+        margin: 6px 0;
+        padding: 6px 16px;
+        text-decoration: none;
+        display: block;
+        &:hover {
+          background-color: $hover-color;
+        }
       }
     }
   }
