@@ -1,0 +1,17 @@
+.Login {
+  margin: auto;
+  form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    .Login__input {
+      display: flex;
+      justify-content:center;
+      margin: 0 0 24px;
+      height: 30px;
+      input {
+        padding: 0 6px;
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import '../../variables';
+
+.Dashboard {
+  margin: 0 auto 50px;
+  .Dashboard__access-token {
+    width: 22vw;
+    min-width: 270px;
+    margin: 0 auto 20px;
+    padding: 20px 0;
+    border: solid 3px $primary-color;
+    border-radius: 5px;
+    .Dashboard__code {
+      margin: 20px auto 0;
+      width: 20vw;
+      min-width: 250px;
+      padding: 6px 0 10px;
+      background: $code-color;
+      border-radius: 5px;
+    }
+  }
+  table {
+    font-size: calc(10px + .5vmin);
+    width: 75vw;
+    border-collapse: collapse;
+    border: solid 3px  $primary-color;
+    // table-layout: fixed;
+    
+    th {
+      border: solid 2px  $primary-color;
+      padding: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    td {
+      border: solid 2px  $primary-color;
+      padding: 6px;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 10vw;
+    }
+  }
+}

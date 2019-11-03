@@ -1,0 +1,35 @@
+@import '../../variables';
+
+.Navbar {
+  background: $primary-color;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: calc(10px + 1vmin);
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: $base-color;
+    }
+  }
+  .Navbar__title {
+    margin: auto 0 6px 20px;
+    padding: 8px 6px 6px;
+  }
+  .Navbar__links {
+    list-style-type: none;
+    display: flex;
+    margin: 0 20px 0 0;
+    padding: 0;
+    li {
+      padding: 8px 6px 6px;
+    }
+    div {
+      cursor: pointer;
+      &:hover {
+        color: $base-color;
+      }
+    }
+  }
+}
