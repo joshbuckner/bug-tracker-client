@@ -1,9 +1,9 @@
 @import '../../variables';
 
 .Dashboard {
-  margin: 0 auto 50px;
+  margin: 50px auto 50px;
   @media (max-width: 768px) {
-    margin: 0 20px 50px;
+    margin: 50px 20px 50px;
   }
   .Dashboard__installation {
     display: flex;

@@ -1,6 +1,7 @@
 @import '../../variables';
 
 .Navbar {
+  position: fixed;
   background: $primary-color;
   width: 100%;
   display: flex;
