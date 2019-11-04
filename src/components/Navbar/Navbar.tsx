@@ -1,10 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { AuthContext } from "../../App/App";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 const Navbar: React.FC = () => {
   const { state, dispatch } = useContext(AuthContext);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, []);
+
+  const handleClickOutside = (event: any) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      return setShowDropdown(false);
+    }
+  };
+
+  const handleClickDropdown = (event: any) => {
+    if (showDropdown) {
+      return setShowDropdown(false);
+    }
+    return setShowDropdown(true);
+  };
 
   const logOut = () => {
     dispatch({ type: "LOGOUT" });
@@ -26,7 +47,7 @@ const Navbar: React.FC = () => {
           </>
         ) : (
           <>
-            <div className="Navbar__dropdown">
+            <div className={["Navbar__dropdown", showDropdown ? "Navbar_dropdown--show" : ""].join(' ')} onClick={handleClickDropdown} ref={dropdownRef}>
               <div className="Navbar__dropdown-user">
                 <img className="Navbar__dropdown-identicon" src={`https://identicon.rmhdev.net/${state.user.name}.png`} alt="user identicon"/>
                 <div>{state.user.name}</div>

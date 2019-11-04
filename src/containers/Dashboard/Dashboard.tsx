@@ -35,9 +35,15 @@ const Dashboard: React.FC = () => {
   return (
     <div className="Dashboard">
       <h2>Dashboard</h2>
-      <div className="Dashboard__access-token">
-        <h4 style={{margin: 0, display: "inline"}}>Access Token</h4>
-        <div className="Dashboard__code"><code>{authState.user.access_token}</code></div>
+      <div className="Dashboard__installation">
+        <div className="Dashboard__code-container">
+          <h5 style={{margin: 0, display: "inline"}}>Access Token</h5>
+          <div className="Dashboard__code"><pre><code>{authState.user.access_token}</code></pre></div>
+        </div>
+        <div className="Dashboard__code-container">
+          <h5 style={{margin: 0, display: "inline"}}>Snippet</h5>
+          <div className="Dashboard__code Dashboard__code--snippet"><pre><code>{`<script>window.onerror=async function(e,n,o,t,a){const s={date:new Date,message:e,file:n,line:o,column:t,error:a},c=await fetch("http://localhost:8080/api/event/${authState.user.access_token}",{method:"POST",body:JSON.stringify(s),headers:{"Content-Type":"application/json"}}),i=await c.json();console.log("Success:",i)};</script>`}</code></pre></div>
+        </div>
       </div>
       <h4 style={{margin: "0 0 20px"}}>Event List</h4>
       <table>
@@ -45,10 +51,10 @@ const Dashboard: React.FC = () => {
           <tr>
             <th>Date</th>
             <th>Message</th>
-            <th>File</th>
-            <th>Line</th>
-            <th>Column</th>
-            <th>Stack Trace</th>
+            <th className="mobile-hidden">File</th>
+            <th style={{width: 40}}>Line</th>
+            <th style={{width: 40}}>Column</th>
+            <th className="mobile-hidden">Stack Trace</th>
           </tr>
         </thead>
         <tbody>
@@ -56,10 +62,10 @@ const Dashboard: React.FC = () => {
             <tr key={event.event_id}>
               <td>{new Date(event.date).toString()}</td>
               <td>{event.message}</td>
-              <td>{event.file}</td>
+              <td className="mobile-hidden">{event.file}</td>
               <td>{event.line}</td>
               <td>{event.column}</td>
-              <td>{event.error ? event.error : "N/A"}</td>
+              <td className="mobile-hidden">{event.error ? event.error : "N/A"}</td>
             </tr>
           ))}
         </tbody>
