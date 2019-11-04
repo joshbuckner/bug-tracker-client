@@ -13,11 +13,13 @@ const Register: React.FC = () => {
 
   const onSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    console.log(input);
     try {
       const data = await postData('http://localhost:8080/api/register', input);
-      history.push("/login");
-      console.log(JSON.stringify(data)); // JSON-string from `response.json()` call
+      if (data.message === "success") {
+        history.push("/login");
+      } else {
+        console.log(data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -43,44 +45,46 @@ const Register: React.FC = () => {
 
   return (
     <div className="Register">
-      <h2>Sign up</h2>
-      <form noValidate onSubmit={onSubmit}>
-        <div className="Register__input">
-          <input
-            onChange={onChange}
-            id="name"
-            type="text"
-            placeholder="Username"
-          />
-        </div>
-        <div className="Register__input">
-          <input
-            onChange={onChange}
-            id="email"
-            type="text"
-            placeholder="Email"
-          />
-        </div>
-        <div className="Register__input">
-          <input
-            onChange={onChange}
-            id="password"
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-        <div className="Register__input">
-          <input
-            onChange={onChange}
-            id="password2"
-            type="password"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div className="Register__input">
-          <input type="submit" value="Sign up" />
-        </div>
-      </form>
+      <div className="Register__card">
+        <h2>Sign up</h2>
+        <form noValidate onSubmit={onSubmit}>
+          <div className="Register__input">
+            <input
+              onChange={onChange}
+              id="name"
+              type="text"
+              placeholder="Username"
+            />
+          </div>
+          <div className="Register__input">
+            <input
+              onChange={onChange}
+              id="email"
+              type="text"
+              placeholder="Email"
+            />
+          </div>
+          <div className="Register__input">
+            <input
+              onChange={onChange}
+              id="password"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <div className="Register__input">
+            <input
+              onChange={onChange}
+              id="password2"
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div className="Register__input">
+            <input type="submit" value="Sign up" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

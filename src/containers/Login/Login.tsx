@@ -49,28 +49,30 @@ const Login: React.FC = () => {
 
   return (
     <div className="Login">
-      <h2>Log in</h2>
-      <form noValidate onSubmit={onSubmit}>
-        <div className="Login__input">
-          <input
-            onChange={onChange}
-            id="email"
-            type="text"
-            placeholder="Email"
-          />
-        </div>
-        <div className="Login__input">
-          <input
-            onChange={onChange}
-            id="password"
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-        <div className="Login__input">
-          <input type="submit" value="Log in" />
-        </div>
-      </form>
+      <div className="Login__card">
+        <h2>Log in</h2>
+        <form noValidate onSubmit={onSubmit}>
+          <div className="Login__input">
+            <input
+              onChange={onChange}
+              id="email"
+              type="text"
+              placeholder="Email"
+            />
+          </div>
+          <div className="Login__input">
+            <input
+              onChange={onChange}
+              id="password"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <div className="Login__input">
+            <input type="submit" value="Log in" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
