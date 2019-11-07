@@ -62,12 +62,13 @@ const App: React.FC = () => {
       <AuthContext.Provider value={{ state, dispatch }}>
         <div className="App">
           <Navbar />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/register" component={Register} />
           {!state.isAuthenticated ? (
             <>
               <Redirect to="/" />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
+              
+              {/* <Route exact path="/" component={Login} /> */}
             </>
           ) : (
             <>
