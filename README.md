@@ -10,7 +10,7 @@ Works in conjunction with Bug Tracker Api located at https://github.com/joshbuck
 
 `git clone https://github.com/joshbuckner/bug-tracker-client.git`
 
-Enter the Project Directory:
+Enter the project directory:
 
 `cd bug-tracker-client`
 
