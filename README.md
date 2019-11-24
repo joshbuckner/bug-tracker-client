@@ -4,7 +4,15 @@ Create an account and begin tracking errors in any client-side javascript applic
 
 Works in conjunction with Bug Tracker Api located at https://github.com/joshbuckner/bug-tracker-api
 
-## Available Scripts
+## Getting Started
+
+### Clone the Repo
+
+`git clone https://github.com/joshbuckner/bug-tracker-client.git`
+
+Enter the Project Directory:
+
+`cd bug-tracker-client`
 
 In the project directory, you can run:
 
