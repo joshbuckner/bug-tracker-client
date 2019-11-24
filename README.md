@@ -1,3 +1,7 @@
+## Bug Tracker Client
+
+Works in conjunction with Bug Tracker Api located at https://github.com/joshbuckner/bug-tracker-api
+
 ## Available Scripts
 
 In the project directory, you can run:
