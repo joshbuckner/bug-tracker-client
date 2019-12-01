@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../App/App';
 import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './Register.scss';
 
+interface Errors {
+  name?: string
+  email?: string
+  password?: string
+  password2?: string
+}
+
 const Register: React.FC = () => {
+  const { dispatch } = useContext(AuthContext);
   let history = useHistory();
   const [input, setInput] = useState({ name: '', email: '', password: '', password2: '' });
+  const [errors, setErrors] = useState<Errors>({});
 
   const onChange = (e: { target: { id: any; value: any; }; }) => {
     const { id, value } = e.target;
@@ -12,13 +23,18 @@ const Register: React.FC = () => {
   }
 
   const onSubmit = async (e: { preventDefault: () => void; }) => {
+    console.log('submitting')
     e.preventDefault();
     try {
       const data = await postData('http://localhost:8080/api/register', input);
       if (data.message === "success") {
-        history.push("/login");
+        history.push("/");
+        if (data.token) {
+          dispatch({ type: "LOGIN", payload: data });
+        }
       } else {
         console.log(data);
+        setErrors(data);
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +71,7 @@ const Register: React.FC = () => {
               type="text"
               placeholder="Username"
             />
+            {errors.name && <div className="Register__error">{errors.name}</div>}
           </div>
           <div className="Register__input">
             <input
@@ -63,6 +80,7 @@ const Register: React.FC = () => {
               type="text"
               placeholder="Email"
             />
+            {errors.email && <div className="Register__error">{errors.email}</div>}
           </div>
           <div className="Register__input">
             <input
@@ -71,6 +89,7 @@ const Register: React.FC = () => {
               type="password"
               placeholder="Password"
             />
+            {errors.password && <div className="Register__error">{errors.password}</div>}
           </div>
           <div className="Register__input">
             <input
@@ -79,11 +98,16 @@ const Register: React.FC = () => {
               type="password"
               placeholder="Confirm Password"
             />
+            {errors.password2 && <div className="Register__error">{errors.password2}</div>}
           </div>
-          <div className="Register__input">
+          <div className="Register__button">
             <input type="submit" value="Sign up" />
           </div>
         </form>
+        <div className="Register__login">
+          <div>or</div>
+          <div><Link to="/">Login</Link></div>
+        </div>
       </div>
     </div>
   );

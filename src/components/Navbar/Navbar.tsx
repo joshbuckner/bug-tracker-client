@@ -36,12 +36,7 @@ const Navbar: React.FC = () => {
       <ul className="Navbar__links">
         {!state.isAuthenticated ? (
           <>
-            <Link to="/register">
-              <li>Register</li>
-            </Link>
-            <Link to="/">
-              <li>Login</li>
-            </Link>
+            
           </>
         ) : (
           <>

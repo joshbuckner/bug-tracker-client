@@ -1,10 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../App/App';
+import { Link } from "react-router-dom";
 import './Login.scss';
+
+interface Errors {
+  email?: string
+  password?: string
+}
 
 const Login: React.FC = () => {
   const { dispatch } = useContext(AuthContext);
   const [input, setInput] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState<Errors>({});
 
   const onChange = (e: { target: { id: any; value: any; }; }) => {
     const { id, value } = e.target;
@@ -17,6 +24,8 @@ const Login: React.FC = () => {
       const data = await postData('http://localhost:8080/api/login', input);
       if (data.token) {
         dispatch({ type: "LOGIN", payload: data });
+      } else {
+        setErrors(data);
       }
       // JSON-string from `response.json()` call
       // localStorage.setItem('jwtToken', data.token)
@@ -59,6 +68,7 @@ const Login: React.FC = () => {
               type="text"
               placeholder="Email"
             />
+            {errors.email && <div className="Login__error">{errors.email}</div>}
           </div>
           <div className="Login__input">
             <input
@@ -67,11 +77,16 @@ const Login: React.FC = () => {
               type="password"
               placeholder="Password"
             />
+            {errors.password && <div className="Login__error">{errors.password}</div>}
           </div>
-          <div className="Login__input">
+          <div className="Login__button">
             <input type="submit" value="Log in" />
           </div>
         </form>
+        <div className="Login__register">
+          <div>or</div>
+          <div><Link to="/register">Register</Link></div>
+        </div>
       </div>
     </div>
   );
