@@ -32,6 +32,7 @@ const Dashboard: React.FC = () => {
       setEvents(json.data);
     };
     getEvents();
+    // console.log(authState);
   }, [authState]);
   const formatTime = (iso:any) => {
     const date = new Date(iso); 
@@ -43,7 +44,7 @@ const Dashboard: React.FC = () => {
       <div className="Dashboard__installation">
         <div className="Dashboard__code-container">
           <h5 style={{margin: 0, display: "inline"}}>Access Token</h5>
-          <div className="Dashboard__code-token"><pre><code>{authState.user.access_token}</code></pre></div>
+          <div className="Dashboard__code-token"><pre><code>{authState.user.token}</code></pre></div>
         </div>
         <div className="Dashboard__code-container">
           <h5 style={{margin: 0, display: "inline"}}>Snippet</h5>

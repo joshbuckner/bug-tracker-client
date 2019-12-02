@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
-import Home from "../containers/Home/Home";
 import Register from "../containers/Register/Register";
 import Login from "../containers/Login/Login";
 import Dashboard from "../containers/Dashboard/Dashboard";
@@ -43,11 +42,9 @@ const reducer = (state: any, action: any) => {
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
-    const currentUser = localStorage.getItem("user");
+    const user = localStorage.getItem("user");
     const currentToken = localStorage.getItem("token");
-    const user = currentUser !== null ? JSON.parse(currentUser) : null;
     const token = currentToken !== null ? JSON.parse(currentToken) : null;
-
     if (user && token) {
       dispatch({
         type: "LOGIN",
@@ -65,11 +62,7 @@ const App: React.FC = () => {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           {!state.isAuthenticated ? (
-            <>
-              <Redirect to="/" />
-              
-              {/* <Route exact path="/" component={Login} /> */}
-            </>
+            <Redirect to="/" />
           ) : (
             <>
               <Redirect to="/dashboard" />

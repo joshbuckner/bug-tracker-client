@@ -34,11 +34,7 @@ const Navbar: React.FC = () => {
     <div className="Navbar">
       <h4 className="Navbar__title">Bug Tracker</h4>
       <ul className="Navbar__links">
-        {!state.isAuthenticated ? (
-          <>
-            
-          </>
-        ) : (
+        {state.isAuthenticated && (
           <>
             <div className={["Navbar__dropdown", showDropdown ? "Navbar_dropdown--show" : ""].join(' ')} onClick={handleClickDropdown} ref={dropdownRef}>
               <div className="Navbar__dropdown-user">
