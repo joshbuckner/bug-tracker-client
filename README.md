@@ -4,6 +4,8 @@ Create an account and begin tracking errors in any client-side javascript applic
 
 Works in conjunction with Bug Tracker Api located at https://github.com/joshbuckner/bug-tracker-api
 
+![bug-tracker--dashboard](https://user-images.githubusercontent.com/39353526/70022649-86247e80-155a-11ea-8716-84238a32c0a3.png)
+
 ## Getting Started
 
 ### Clone the Repo
