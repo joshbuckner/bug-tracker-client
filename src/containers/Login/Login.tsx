@@ -8,17 +8,17 @@ interface Errors {
   password?: string
 }
 
+interface Data {
+  email: string
+  password: string
+}
+
 const Login: React.FC = () => {
   const { dispatch } = useContext(AuthContext);
   const [input, setInput] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState<Errors>({});
 
-  const onChange = (e: { target: { id: any; value: any; }; }) => {
-    const { id, value } = e.target;
-    setInput({...input, [id]: value});
-  }
-
-  const onSubmit = async (e: { preventDefault: () => void; }) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const data = await postData('http://localhost:8080/api/login', input);
@@ -27,33 +27,25 @@ const Login: React.FC = () => {
       } else {
         setErrors(data);
       }
-      // JSON-string from `response.json()` call
-      // localStorage.setItem('jwtToken', data.token)
-      // // Set token to Auth header
-      // setAuthToken(data.token);
-      // // Decode token to get user data
-      // const decoded = jwt_decode(data.token);
     } catch (error) {
       console.error(error);
     }
   }
   
-  const postData = async (url = '', data = {}) => {
-    // Default options are marked with *
+  const postData = async (url: RequestInfo, data: Data) => {
     const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      redirect: 'follow',
+      referrer: 'no-referrer',
+      body: JSON.stringify(data)
     });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    return await response.json();
   }
 
   return (
@@ -63,7 +55,7 @@ const Login: React.FC = () => {
         <form noValidate onSubmit={onSubmit}>
           <div className="Login__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="email"
               type="text"
               placeholder="Email"
@@ -72,7 +64,7 @@ const Login: React.FC = () => {
           </div>
           <div className="Login__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="password"
               type="password"
               placeholder="Password"
@@ -85,7 +77,9 @@ const Login: React.FC = () => {
         </form>
         <div className="Login__register">
           <div>or</div>
-          <div><Link to="/register">Register</Link></div>
+          <div>
+            <Link to="/register">Register</Link>
+          </div>
         </div>
       </div>
     </div>

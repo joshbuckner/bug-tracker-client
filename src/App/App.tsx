@@ -9,15 +9,41 @@ import "./App.scss";
 
 export const AuthContext = React.createContext<any>(null);
 
+interface State {
+  isAuthenticated: boolean
+  user: User | null
+  token: string | null
+}
+
+interface User {
+  email: string
+  exp: number
+  iat: number
+  name: string
+  token: string
+}
+
+interface Action {
+  type: "LOGIN" | "LOGOUT"
+  payload?: Payload
+}
+
+interface Payload {
+  token: string
+}
+
 const initialState = {
   isAuthenticated: false,
   user: null,
   token: null
 };
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "LOGIN":
+      if (!action.payload) {
+        return state;
+      }
       localStorage.clear();
       localStorage.setItem("user", JSON.stringify(jwtDecode(action.payload.token.replace("Bearer ", ""))));
       localStorage.setItem("token", JSON.stringify(action.payload.token));

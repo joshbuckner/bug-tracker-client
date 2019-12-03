@@ -11,19 +11,20 @@ interface Errors {
   password2?: string
 }
 
+interface Data {
+  name: string
+  email: string
+  password: string
+  password2: string
+}
+
 const Register: React.FC = () => {
   const { dispatch } = useContext(AuthContext);
   let history = useHistory();
   const [input, setInput] = useState({ name: '', email: '', password: '', password2: '' });
   const [errors, setErrors] = useState<Errors>({});
 
-  const onChange = (e: { target: { id: any; value: any; }; }) => {
-    const { id, value } = e.target;
-    setInput({...input, [id]: value});
-  }
-
-  const onSubmit = async (e: { preventDefault: () => void; }) => {
-    console.log('submitting')
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const data = await postData('http://localhost:8080/api/register', input);
@@ -33,7 +34,6 @@ const Register: React.FC = () => {
           dispatch({ type: "LOGIN", payload: data });
         }
       } else {
-        console.log(data);
         setErrors(data);
       }
     } catch (error) {
@@ -41,22 +41,20 @@ const Register: React.FC = () => {
     }
   }
   
-  const postData = async (url = '', data = {}) => {
-    // Default options are marked with *
+  const postData = async (url: RequestInfo, data: Data) => {
     const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      redirect: 'follow',
+      referrer: 'no-referrer',
+      body: JSON.stringify(data)
     });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    return await response.json();
   }
 
   return (
@@ -66,7 +64,7 @@ const Register: React.FC = () => {
         <form noValidate onSubmit={onSubmit}>
           <div className="Register__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="name"
               type="text"
               placeholder="Username"
@@ -75,7 +73,7 @@ const Register: React.FC = () => {
           </div>
           <div className="Register__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="email"
               type="text"
               placeholder="Email"
@@ -84,7 +82,7 @@ const Register: React.FC = () => {
           </div>
           <div className="Register__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="password"
               type="password"
               placeholder="Password"
@@ -93,7 +91,7 @@ const Register: React.FC = () => {
           </div>
           <div className="Register__input">
             <input
-              onChange={onChange}
+              onChange={e => setInput({...input, [e.target.id]: e.target.value})}
               id="password2"
               type="password"
               placeholder="Confirm Password"
@@ -101,12 +99,17 @@ const Register: React.FC = () => {
             {errors.password2 && <div className="Register__error">{errors.password2}</div>}
           </div>
           <div className="Register__button">
-            <input type="submit" value="Sign up" />
+            <input 
+              type="submit" 
+              value="Sign up" 
+            />
           </div>
         </form>
         <div className="Register__login">
           <div>or</div>
-          <div><Link to="/">Login</Link></div>
+          <div>
+            <Link to="/">Login</Link>
+          </div>
         </div>
       </div>
     </div>

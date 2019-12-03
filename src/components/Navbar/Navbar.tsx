@@ -14,13 +14,13 @@ const Navbar: React.FC = () => {
     }
   }, []);
 
-  const handleClickOutside = (event: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       return setShowDropdown(false);
     }
   };
 
-  const handleClickDropdown = (event: any) => {
+  const handleClickDropdown = () => {
     if (showDropdown) {
       return setShowDropdown(false);
     }
@@ -36,9 +36,17 @@ const Navbar: React.FC = () => {
       <ul className="Navbar__links">
         {state.isAuthenticated && (
           <>
-            <div className={["Navbar__dropdown", showDropdown ? "Navbar_dropdown--show" : ""].join(' ')} onClick={handleClickDropdown} ref={dropdownRef}>
+            <div 
+              className={["Navbar__dropdown", showDropdown ? "Navbar_dropdown--show" : ""].join(' ')} 
+              onClick={handleClickDropdown} 
+              ref={dropdownRef}
+            >
               <div className="Navbar__dropdown-user">
-                <img className="Navbar__dropdown-identicon" src={`https://identicon.rmhdev.net/${state.user.name}.png`} alt="user identicon"/>
+                <img 
+                  className="Navbar__dropdown-identicon" 
+                  src={`https://identicon.rmhdev.net/${state.user.name}.png`} 
+                  alt="user identicon"
+                />
                 <div>{state.user.name}</div>
                 <svg viewBox="0 0 255 255" height="14">
                   <g>
