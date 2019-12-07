@@ -11,15 +11,15 @@ interface Events {
   [index: number]: Event
 }
 
-interface Event { 
-  column: string; 
-  date: string; 
-  error: null | string; 
-  event_id: number; 
-  file: string; 
-  line: string; 
-  message: string; 
-  user_id: number; 
+interface Event {
+  column: string;
+  date: string;
+  error: null | string;
+  event_id: number;
+  file: string;
+  line: string;
+  message: string;
+  user_id: number;
 }
 
 const Dashboard: React.FC = () => {
@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
         <div className="Dashboard__code-container">
           <h5>Snippet</h5>
           <div className="Dashboard__code-snippet">
-            <pre><code className="language-javascript">{`<script>window.onerror=async function(e,n,o,t,a){const s={date:new Date,message:e,file:n,line:o,column:t,error:a},c=await fetch("http://localhost:8080/api/event/${authState.user.access_token}",{method:"POST",body:JSON.stringify(s),headers:{"Content-Type":"application/json"}}),i=await c.json();console.log("Success:",i)};</script>`}</code></pre>
+            <pre><code className="language-javascript">{`<script>window.onerror=async function(e,n,o,t,a){const s={date:new Date,message:e,file:n,line:o,column:t,error:a},c=await fetch("http://localhost:8080/api/event/${authState.user.token}",{method:"POST",body:JSON.stringify(s),headers:{"Content-Type":"application/json"}}),i=await c.json();console.log("Success:",i)};</script>`}</code></pre>
           </div>
         </div>
       </div>
