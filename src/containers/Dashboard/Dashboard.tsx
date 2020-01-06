@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
   }, [authState]);
   const formatTime = (iso: string) => {
     const date = new Date(iso); 
-    return `${String(date.getMonth())}/${String(date.getDate())}/${String(date.getFullYear()).substring(2)} - ${String(date.getHours())}:${String(date.getMinutes())}:${date.getSeconds() > 9 ? String(date.getSeconds()) : '0' + String(date.getSeconds())}`
+    return `${String(date.getMonth()+1)}/${String(date.getDate())}/${String(date.getFullYear()).substring(2)} - ${String(date.getHours())}:${String(date.getMinutes())}:${date.getSeconds() > 9 ? String(date.getSeconds()) : '0' + String(date.getSeconds())}`
   }
   return (
     <div className="Dashboard">
